@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="{{url_for('static', filename='simenv/img/favicon.ico')}}" />
+</head>
+
+<body>    
+    <br><br>
+
+    <div style="display: flex; justify-content: center; user-select: none;">
+        <div id="left-panel" style="display: flex; justify-content: center; align-items: center; font-size: 30pt;"><div id="left-arrow"></div></div>
+        <div class="center-panel" id="center-panel">
+            <img src="" id="tutorialImg" style="width: 80vw;"/>
+        </div>
+        <div id="right-panel" style="display: flex; justify-content: center; align-items: center; font-size: 30pt;"><div id="right-arrow"></div></div>
+    </div>
+
+    <script>
+        var nextStage = {{ next_stage }};
+
+        var images = [];
+        var nextLocation = "";
+        var index = 0;
+
+        // intro/training tab
+        if (nextStage == 0) {
+            images = ["{{url_for('static', filename='tutorial/img/training_1.png')}}", "{{url_for('static', filename='tutorial/img/training_2.png')}}", "{{url_for('static', filename='tutorial/img/training_3.png')}}", "{{url_for('static', filename='tutorial/img/training_4.png')}}", "{{url_for('static', filename='tutorial/img/training_4.png')}}", "{{url_for('static', filename='tutorial/img/training_5.png')}}", "{{url_for('static', filename='tutorial/img/training_6.png')}}"];
+            nextLocation = "/test?workerId={{ worker_id }}&mission=2";
+        }
+
+        // consent
+        if (nextStage == 1) {
+            document.getElementById("tutorialImg").style.height = "95vh";
+            document.getElementById("tutorialImg").style.width = "auto";
+            images = ["{{url_for('static', filename='tutorial/img/consent-1.png')}}", "{{url_for('static', filename='tutorial/img/consent-2.png')}}"];
+            nextLocation = "";
+        }
+
+        // networks tab
+        if (nextStage == 2) {
+            images = ["{{url_for('static', filename='tutorial/img/instr-connect-1.png')}}", "{{url_for('static', filename='tutorial/img/instr-connect-2.png')}}", "{{url_for('static', filename='tutorial/img/instr-connect-3.png')}}"];
+            nextLocation = "/connect?workerId={{ worker_id }}&mission={{ mission }}";
+        }
+
+        // Stage 1 tab
+        if (nextStage == 3) {
+            images = ["{{url_for('static', filename='tutorial/img/instr-simenv-stage1-1.png')}}", "{{url_for('static', filename='tutorial/img/instr-simenv-stage1-2.png')}}", "{{url_for('static', filename='tutorial/img/instr-simenv-stage1-3.png')}}", "{{url_for('static', filename='tutorial/img/instr-simenv-stage1-4.png')}}"]
+            //nextLocation = "/test?workerId={{ worker_id }}&mission={{ mission }}&nextStage=1";
+            nextLocation = "/stage?workerId={{ worker_id }}&mission={{ mission }}&stage=1"
+        }
+
+        // Stage 2 tab
+        if (nextStage == 4) {
+            images = ["{{url_for('static', filename='tutorial/img/instr-sim-1.png')}}", "{{url_for('static', filename='tutorial/img/instr-sim-2.png')}}", "{{url_for('static', filename='tutorial/img/instr-sim-3.png')}}", "{{url_for('static', filename='tutorial/img/instr-sim-4.png')}}", "{{url_for('static', filename='tutorial/img/instr-sim-5.png')}}"];
+            //nextLocation = "/test?workerId={{ worker_id }}&mission={{ mission }}&nextStage=2"
+            nextLocation = "/stage?workerId={{ worker_id }}&mission={{ mission }}&stage=2"
+        }
+
+        // Stage 3 tab
+        if (nextStage == 5) {
+            images = ["{{url_for('static', filename='tutorial/img/instr-simenv-stage3-1.png')}}", "{{url_for('static', filename='tutorial/img/instr-simenv-stage3-6.png')}}", "{{url_for('static', filename='tutorial/img/instr-simenv-stage3-7.png')}}", "{{url_for('static', filename='tutorial/img/instr-simenv-stage3-8.png')}}", "{{url_for('static', filename='tutorial/img/instr-simenv-stage3-9.png')}}", "{{url_for('static', filename='tutorial/img/instr-simenv-stage1-4.png')}}"]
+            //nextLocation = "/test?workerId={{ worker_id }}&mission={{ mission }}&nextStage=3";
+            nextLocation = "/stage?workerId={{ worker_id }}&mission={{ mission }}&stage=3";
+        }
+
+
+        document.getElementById("tutorialImg").src = images[0];
+        setupArrows();
+
+        
+        function setupArrows() {
+            if (index == 0) {
+                document.getElementById("left-arrow").innerHTML = "";
+
+                document.getElementById("right-arrow").innerHTML = "→";
+                document.getElementById("right-arrow").onclick = rightClick;
+            }
+            else if (index > 0 && index <= images.length) {
+                document.getElementById("left-arrow").innerHTML = "←";
+                document.getElementById("left-arrow").onclick = leftClick;
+
+                document.getElementById("right-arrow").innerHTML = "→";
+                document.getElementById("right-arrow").onclick = rightClick;
+            }
+            else {
+                document.getElementById("left-arrow").innerHTML = "←";
+                document.getElementById("left-arrow").onclick = leftClick;
+
+                document.getElementById("right-arrow").innerHTML = "";
+            }
+        }
+
+
+        function leftClick() {
+            if (index > 0) {
+                index -= 1;
+                document.getElementById("tutorialImg").src = images[index];
+                setupArrows();
+            }
+        };
+
+
+        function rightClick() {
+            if (index < images.length-1) {
+                index += 1;
+                document.getElementById("tutorialImg").src = images[index];
+                setupArrows();
+            }
+
+            // if pressing right on the last instruction, go to the next stage
+            else if (index + 1 == images.length) {
+                var makeSure = confirm(nextStage != 1 ? "Are you ready to proceed?" : "Do you consent to this study?");
+                if (makeSure == true) {
+                    log({"stage": "tutorial", "action": nextStage == 1 ? "Consented to study" : "Moving on from tutorial"});
+                    if (nextStage != 1) {
+                        window.location = nextLocation;
+                    }
+                }
+                else {
+                    log({"stage": "tutorial", "action": nextStage == 1 ? "DID NOT consent to study" : "Not moving on from tutorial"});
+                }
+            }
+        };
+
+        log({"stage": "tutorial", "action": "opened-tutorial"});
+        function log(data) {
+            data["worker-id"] = "{{ worker_id }}";  // include the worker ID
+            return fetch("/logging", {method: "POST", body: JSON.stringify(data)});
+        }
+
+    </script>
+
+</body>
+
+</html>

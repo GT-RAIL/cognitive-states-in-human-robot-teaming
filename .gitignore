@@ -1,0 +1,2 @@
+analysis/logs/*.txt
+*.pyc

@@ -72,7 +72,11 @@ Below is an outline of what each file contains.
 
 Each file has numerous comments as documentation. However, to use this module you should not need to edit any files except `main.py`.
 
-To replay a user's teleoperation, the `replay.py` script uses a user's log file and Selenium to reproduce the user's browser interactions. This can be useful for visualizing user runs (e.g., questionable runs) and for collecting new serverside or clientside metrics from old data. We found replays to be highly accurate on our hardware and network connection, so have included it in this release as an additional tool. If you intend to use the script, you will need to edit `replay.py` for each user you replay.
+To replay a user's teleoperation, the `replay.py` script uses a user's log file and Selenium to reproduce the user's browser interactions. This can be useful for visualizing user runs and for collecting new serverside or clientside metrics from old runs. We found replays to be highly accurate on our hardware and network connection, however you may need to tune the delays to fit your connection. To use the replay script, edit `replay.py` to set your user parameters, open a terminal, and run:
+
+`$ cd analysis`
+
+`$ python3 replay.py`
 
 ___
 

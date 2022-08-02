@@ -82,7 +82,7 @@ ___
 
 ### Webserver Module
 
-The Webserver Module is a Python webserver built on Flask and ROS1, and the code is contained in the `/server/` folder. The webserver is the interface between study participants and the WeBots simulator. In our study, we ran the webserver on the same computer as the WeBots simulator, allowing us to run both a ROS node to interact with the simulator, and a webserver to deliver web and ROS content to users over the internet.
+The Webserver Module is a Python webserver built on Flask and ROS1, and the code is contained in the `/server/` folder. The webserver is the interface between study participants and the WeBots simulator. Since we want to pass information between the participant's browser and the WeBots simulator (which is ROS-based), we ran the webserver on the same computer as the simulator run both a ROS node to interact with the simulator, and a webserver to deliver web and ROS content to users over the internet.
 
 To start the webserver, open a terminal and run:
 
@@ -90,21 +90,21 @@ To start the webserver, open a terminal and run:
 
 `$ python3 app.py`
 
-By default the webserver binds to port 5000, this is specified by the `port=5000` parameter at the bottom of `app.py`, and can be changed to whatever port you wish to use. Using port 80 is common as it is the default http port, other ports will require specifying the port in the URL, http://(URL):(port), for example http://123.456.789.0:5000. Sometimes Flask or Python will fail to unbind from a port, giving a "Address already in use" error when running the webserver. In that event, it is easiest to just change the port in `app.py`.
+By default the webserver binds to port 5000, this is specified by the `port=5000` parameter at the bottom of `app.py`, and can be changed to whatever port you wish to use. Using port 80 is common as it is the default http port, other ports will require specifying the port in the URL, `http://(address):(port)`, for example `http://1.2.3.4:5000`. Sometimes Flask or Python will fail to unbind from a port when the server is restarted, giving a "Address already in use" error when running the webserver. In that event, it is easiest to just change the port in `app.py`.
 
-To give our server a public web address without the hassle of port forwarding (which can be challenging over a school network), we used [ngrok](https://ngrok.com). If you plan to only use the webserver locally (i.e., only devices on your personal or university's network), there is no need to run ngrok.
+To give our server a public web address without the hassle of port forwarding (which can be challenging over a school network), we used [ngrok](https://ngrok.com). If you plan to only use the webserver locally (i.e., connect to it only with devices on your personal or university's network), there is no need to run ngrok, and you can use your webserver computer's IP address.
 
 After installing ngrok, to create an HTTP tunnel to a specified port, open a terminal and run:
 
 `$ ngrok http 5000`
 
-The `5000` is the port to bind ngrok's URL too, so if you change the port in `app.py`, also change it in the above command.
+The `5000` is the port to bind ngrok's URL to, so if you change the port in `app.py`, also change it in the above command.
 
 The `xxxx-xxx-xxx-xxx-xxx.ngrok.io` URL shown in ngrok's output is the URL that will connect to the webserver. To try it out, open that URL in your web browser. If you get a 404 error, make sure ngrok is running, the webserver is running, and ngrok is using the port specified in `app.py`.
 
 The webserver covers:
 
-* Showing users an overview of what the user study entails, and obtain consent.
+* Showing users an overview of what the user study entails, and obtaining consent.
 * Conducting a preliminary demographics questionnaire.
 * Conducting the Network Inference, Object Tracking, and Situation Awareness cognitive skill tests.
 * Conducting a short training course on robot teleoperation.

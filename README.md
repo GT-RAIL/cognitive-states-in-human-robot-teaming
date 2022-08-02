@@ -35,7 +35,7 @@ ___
 
 ### Analysis Module
 
-The Analysis Module runs linearly -- a single script (`main.py`) processes the data (calling various functions in other files), analyzes the possible user teams, and plots the results. Most of the heavy lifting is pushed to functions in files in the `/processing/`, `/allocation/`, and `/plotting/` folders.
+The Analysis Module runs linearly -- a single script (`main.py`) processes the data (calling various functions in other files), analyzes the possible user teams, and plots the results. Most of the heavy lifting is pushed to functions in Python scripts in the `/processing/`, `/allocation/`, and `/plotting/` folders.
 
 As shown by *How to reproduce our numerical and visual results*, the terminal command `python3 main.py` will run the entire analysis module.
 

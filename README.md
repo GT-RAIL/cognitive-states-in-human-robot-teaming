@@ -22,7 +22,7 @@ ___
 
 ### Getting Started: Reproduce our Results
 
-A single script, `main.py`, runs all our user study data analysis and generates the plots seen in our paper. Open a terminal and run:
+A single script, `main.py`, runs our user study data analysis and generates the plots seen in our paper. Open a terminal and run:
 
 `$ cd analysis`
 

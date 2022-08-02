@@ -37,7 +37,7 @@ ___
 
 The Analysis Module runs linearly -- a single script (`main.py`) processes the data (calling various functions in other files), analyzes the possible user teams, and plots the results. Most of the heavy lifting is pushed to functions in Python scripts in the `/processing/`, `/allocation/`, and `/plotting/` folders.
 
-As shown by *How to reproduce our numerical and visual results*, the terminal command `python3 main.py` will run the entire analysis module.
+As shown in the *Getting Started* section, the terminal command `python3 main.py` will run the entire analysis module.
 
 **NOTE: If you make your own log files by running through the user study, create a `/logs/` folder in `/analysis/` and place the log .txt files there for analysis! You will also need to uncomment a line in `main.py`, see that file's comments for instructions.**
 

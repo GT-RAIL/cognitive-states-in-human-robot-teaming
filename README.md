@@ -20,7 +20,7 @@ All code should work out of the box. While I do not have an anaconda environment
 
 ___
 
-### How to reproduce our numerical and visual results
+### Getting Started: Reproduce our Results
 
 A single script, `main.py`, runs all our user study data analysis and generates the plots seen in our paper. Open a terminal and run:
 

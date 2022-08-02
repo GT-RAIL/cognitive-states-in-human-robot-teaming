@@ -16,22 +16,26 @@ This repository contains the following modules:
 
 All code should work out of the box. While I do not have an anaconda environment set up for this project, `requirements.txt` details the Python 3 packages and versions used. Please email Jack Kolb if there are any issues!
 
+___
 
 ### How to reproduce our numerical and visual results
 
-A single script, `main.py`, runs all our user study data analysis and generates the plots seen in our paper.
+A single script, `main.py`, runs all our user study data analysis and generates the plots seen in our paper. Open a terminal and run:
 
-`cd analysis`
+`$ cd analysis`
 
-`python3 main.py`
+`$ python3 main.py`
 
 
 The script's output contains the metrics we presented in our paper, and will generate the figures we used in our paper. Note that we slightly edited several figures by removing/repositioning legends and adding additional text.
 
+___
 
 ### Analysis Module
 
 The Analysis Module runs linearly -- a single script (`main.py`) processes the data (calling various functions in other files), analyzes the possible user teams, and plots the results. Most of the heavy lifting is pushed to functions in files in the `/processing/`, `/allocation/`, and `/plotting/` folders.
+
+As shown by *How to reproduce our numerical and visual results*, the terminal command `python3 main.py` will run the entire analysis module.
 
 **NOTE: If you make your own log files by running through the user study, create a `/logs/` folder in `/analysis/` and place the log .txt files there for analysis! You will also need to uncomment a line in `main.py`, see that file's comments for instructions.**
 
@@ -67,3 +71,47 @@ Below is an outline of what each file contains.
 Each file has numerous comments as documentation. However, to use this module you should not need to edit any files except `main.py`.
 
 To replay a user's teleoperation, the `replay.py` script uses a user's log file and Selenium to reproduce the user's browser interactions. This can be useful for visualizing user runs (e.g., questionable runs) and for collecting new serverside or clientside metrics from old data. We found replays to be highly accurate on our hardware and network connection, so have included it in this release as an additional tool. If you intend to use the script, you will need to edit `replay.py` for each user you replay.
+
+___
+
+### Webserver Module
+
+The Webserver Module is a Python webserver built on Flask and ROS1, and the code is contained in the `/server/` folder. The webserver is the interface between study participants and the WeBots simulator. In our study, we ran the webserver on the same computer as the WeBots simulator, allowing us to run both a ROS node to interact with the simulator, and a webserver to deliver web and ROS content to users over the internet.
+
+To start the webserver, open a terminal and run:
+
+`$ cd server`
+
+`$ python3 app.py`
+
+By default the webserver binds to port 5000, this is specified by the `port=5000` parameter at the bottom of `app.py`, and can be changed to whatever port you wish to use. Using port 80 is common as it is the default http port, other ports will require specifying the port in the URL, http://(URL):(port), for example http://123.456.789.0:5000. Sometimes Flask or Python will fail to unbind from a port, giving a "Address already in use" error when running the webserver. In that event, it is easiest to just change the port in `app.py`.
+
+To give our server a public web address without the hassle of port forwarding (which can be challenging over a school network), we used [ngrok](https://ngrok.com). If you plan to only use the webserver locally (i.e., only devices on your personal or university's network), there is no need to run ngrok.
+
+After installing ngrok, to create an HTTP tunnel to a specified port, open a terminal and run:
+
+`$ ngrok http 5000`
+
+The `5000` is the port to bind ngrok's URL too, so if you change the port in `app.py`, also change it in the above command.
+
+The `xxxx-xxx-xxx-xxx-xxx.ngrok.io` URL shown in ngrok's output is the URL that will connect to the webserver. To try it out, open that URL in your web browser. If you get a 404 error, make sure ngrok is running, the webserver is running, and ngrok is using the port specified in `app.py`.
+
+The webserver covers:
+
+* Showing users an overview of what the user study entails, and obtain consent.
+* Conducting a preliminary demographics questionnaire.
+* Conducting the Network Inference, Object Tracking, and Situation Awareness cognitive skill tests.
+* Conducting a short training course on robot teleoperation.
+* Conducting the Stage 1, Stage 2, and Stage 3 robot teleoperation tasks.
+* Recording user responses and test/task interactions to a user-specific log file.
+
+Additionally, the webserver:
+
+* Uses ROS to interface with the WeBots simulator to set/remove waypoints for each robot.
+* Converts video feeds from simulator robots into browser-compatible messages, used for the teleoperation tasks.
+* Maintains teleoperation task states and syncs task states between the WeBots simulator and the user's browser.
+
+The webserver's files contain detailed comments on the implementation, so instead we will document the routes that are provided to the user.
+
+(TODO: Add route documentation)
+

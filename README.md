@@ -2,11 +2,13 @@
 
 *Maintained by Jack Kolb (kolb@gatech.edu)*
 
+### Overview
+
 GitHub repository for our paper "Leveraging Cognitive States In Human-Robot Teaming", presented at RO-MAN 2022.
 
-In this work, we investigate the question *"Can we improve 1-1 user-role allocations by considering the team's cognitive skills prior to assignment?"*.
+In this work, we investigated the question *"Can we leverage a team's cognitive skills to improve the team's role assignments?"*.
 
-We conducted a (virtual) user study where participants took three "cognitive skill" tests, and then performed three robot teleoperation tasks. We then created a model that uses cognitive skill scores to predict user performance at the robot teleoperation tasks. Lastly, we split users into teams and evaluated the impact of our model on informing role allocation of team members. We found that our *Individualized Role Assignment* (IRA) resulted in allocations that performed 20% superior to random allocation.
+We conducted a (virtual) user study where participants took three "cognitive skill" tests, and then performed three robot teleoperation tasks. We then created a model that uses cognitive skill scores to predict user performance at the robot teleoperation tasks. Lastly, we split users into teams and evaluated the impact of our model on informing role allocation of team members. We found that our *Individualized Role Assignment* (IRA) resulted in allocations that performed ~20% superior to random allocation.
 
 This repository contains the following modules:
 1. The webserver code we used to conduct our online user study. Contains the cognitive skill tests and robot teleoperation portals.

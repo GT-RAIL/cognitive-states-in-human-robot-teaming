@@ -29,7 +29,7 @@ A single script, `main.py`, runs our user study data analysis and generates the 
 `$ python3 main.py`
 
 
-The script's output contains the metrics we presented in our paper, and will generate the figures we used in our paper. Note that we slightly edited several figures by removing/repositioning legends and adding additional text.
+The script's output contains the metrics we presented in our paper, and will generate the figures we used in our paper. When constructing the paper, we slightly edited several figures by removing/repositioning legends and adding additional text.
 
 ___
 

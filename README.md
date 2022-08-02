@@ -16,7 +16,7 @@ This repository contains the following modules:
 3. The analysis scripts. After conducting the user study, we ran an analysis script to process the webserver logs into cognitive skill test scores and robot teleoperation scores, calculate metrics, and generate plots.
 4. User scores from our study. These scores were obtained using the analysis scripts provided, and then anonymized. They are useful as a verification of our results, and can potentially be used as a dataset. 
 
-All code should work out of the box. While I do not have an anaconda environment set up for this project, `requirements.txt` details the Python 3 packages and versions used. Please email Jack Kolb if there are any issues!
+All code should work out of the box. While we do not have an anaconda environment set up for this project, `requirements.txt` details the Python 3 packages and versions used. Please email Jack Kolb if there are any issues!
 
 ___
 

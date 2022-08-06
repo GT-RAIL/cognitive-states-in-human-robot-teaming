@@ -158,5 +158,7 @@ BibTex:
 
 MLA:
 
-`Kolb, Jack, et al. "Leveraging Cognitive States In Human-Robot Teaming." 2022 31st IEEE International Conference on Robot & Human Interactive Communication (RO-MAN). IEEE, 2022.`
+```
+Kolb, Jack, et al. "Leveraging Cognitive States In Human-Robot Teaming." 2022 31st IEEE International Conference on Robot & Human Interactive Communication (RO-MAN). IEEE, 2022.
+```
 

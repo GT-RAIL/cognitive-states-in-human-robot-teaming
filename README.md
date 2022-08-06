@@ -144,6 +144,7 @@ ___
 If you use our work, please cite us!
 
 BibTex:
+
 ```
 @inproceedings{kolb2022leveraging,
   title={Leveraging Cognitive States In Human-Robot Teaming},
@@ -154,6 +155,8 @@ BibTex:
 }
 ```
 
+
 MLA:
+
 Kolb, Jack, et al. "Leveraging Cognitive States In Human-Robot Teaming." 2022 31st IEEE International Conference on Robot & Human Interactive Communication (RO-MAN). IEEE, 2022.
 

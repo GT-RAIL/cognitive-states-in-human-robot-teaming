@@ -145,7 +145,7 @@ If you use our work, please cite us!
 
 BibTex:
 ```
-@inproceedings{kolb2022predicting,
+@inproceedings{kolb2022leveraging,
   title={Leveraging Cognitive States In Human-Robot Teaming},
   author={Kolb, Jack and Ravichandar, Harish and Chernova, Sonia},
   booktitle={2022 31st IEEE International Conference on Robot \& Human Interactive Communication (RO-MAN)},

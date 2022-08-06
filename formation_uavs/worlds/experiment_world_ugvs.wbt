@@ -1,9 +1,9 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
   info [
-    "UGV teleoperation environment."
+    "Stage 3 Robot Teleoperation"
   ]
-  title "Stage 3 Teleoperation"
+  title "Stage 3 Robot Teleoperation"
   basicTimeStep 8
   defaultDamping Damping {
     linear 0.5
@@ -119,10 +119,10 @@ Moose {
     Compass {
     }
     Camera {
-      translation 1.48 0 0.02
+      translation -1.1 0 0.3
       rotation -0.5773502691896257 0.5773502691896257 0.5773502691896257 -2.09
       width 200
-      height 200
+      height 140
     }
     GPS {
     }
@@ -137,10 +137,10 @@ Moose {
     Compass {
     }
     Camera {
-      translation 1.48 0 0.02
+      translation -1.1 0 0.3
       rotation -0.5773502691896257 0.5773502691896257 0.5773502691896257 -2.09
       width 200
-      height 200
+      height 140
     }
     GPS {
     }
@@ -155,10 +155,10 @@ Moose {
     Compass {
     }
     Camera {
-      translation 1.48 0 0.02
+      translation -1.1 0 0.3
       rotation -0.5773502691896257 0.5773502691896257 0.5773502691896257 -2.09
       width 200
-      height 200
+      height 140
     }
     GPS {
     }
@@ -173,10 +173,10 @@ Moose {
     Compass {
     }
     Camera {
-      translation 1.48 0 0.02
+      translation -1.1 0 0.3
       rotation -0.5773502691896257 0.5773502691896257 0.5773502691896257 -2.09
       width 200
-      height 200
+      height 140
     }
     GPS {
     }

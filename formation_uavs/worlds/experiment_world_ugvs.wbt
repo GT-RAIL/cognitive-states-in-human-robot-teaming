@@ -650,26 +650,6 @@ Pine {
   rotation 0 1 0 -2.618
   name "pine tree(2)"
 }
-dji_mavic_pro {
-  translation 1.66 0.1 1.42746e-07
-  rotation 1 0 0 -1.5707953071795862
-  name "UAV4"
-  cameraSlot [
-    Camera {
-      translation 0 -0.03 1.10196e-07
-      rotation 1 0 0 -1.5708
-      name "cam"
-      width 2000
-      height 2000
-    }
-    Camera {
-      translation 0 -0.03 1e-05
-      rotation 1 0 0 -1.57
-      width 200
-      height 140
-    }
-  ]
-}
 WoodenBox {
   translation -124.26 0.3 -68.86
   name "wooden box(3)"

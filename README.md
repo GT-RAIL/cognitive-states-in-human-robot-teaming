@@ -133,7 +133,7 @@ To launch Webots ROS, run the following:
 
 `$ roslaunch webots_ros webots_ros_python.launch`
 
-Our environment is built upon https://github.com/chungshan/formation_uavs. We have two world files, `experiment_world_uavs.wbt` and `experiment_world_ugvs.wbt`. As denoted by the file names, the former has four UAVs (DGI Mavic drones) for Stage 1, and the later has four UGVs (Clearpath Moose robots) for Stage 3. Our Stage 2, where the participant controls four UAVs and four UGVs, does not need a 3D simulation as there are no visual feeds presented to the user.
+Our Webots worlds were built upon [this sample world](https://github.com/chungshan/formation_uavs). We have two world files, `experiment_world_uavs.wbt` and `experiment_world_ugvs.wbt`. As denoted by the file names, the former has four UAVs (DGI Mavic drones) for Stage 1, and the later has four UGVs (Clearpath Moose robots) for Stage 3. Our Stage 2, where the participant controls four UAVs and four UGVs, does not need a 3D simulation as there are no visual feeds presented to the user.
 
 To run a world, simply open the `.wbt` file and press the play button in the simulator. To improve the simulation framerate we disabled the renderer during our studies (button above the view window).
 

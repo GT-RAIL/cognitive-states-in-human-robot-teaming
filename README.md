@@ -6,17 +6,17 @@
 
 GitHub repository for our paper "Leveraging Cognitive States In Human-Robot Teaming", presented at RO-MAN 2022.
 
-In this work, we investigated the question *"Can we leverage a team's cognitive skills to improve the team's role assignments?"*.
+In this work, we investigated the question *"Can we leverage a team's cognitive state to improve the team's role assignments?"*. Put simply, if we have three people to assign to three different roles, can we use measurements of different cognitive skills to inform who is assigned to each role?
 
 We conducted a (virtual) user study where participants took three "cognitive skill" tests, and then performed three robot teleoperation tasks. We then created a model that uses cognitive skill scores to predict user performance at the robot teleoperation tasks. Lastly, we split users into teams and evaluated the impact of our model on informing role allocation of team members. We found that our *Individualized Role Assignment* (IRA) resulted in allocations that performed ~20% superior to random allocation.
 
 This repository contains the following modules:
-1. The webserver code we used to conduct our online user study. Contains the cognitive skill tests and robot teleoperation portals.
-2. The robot simulation files. We used the WeBots simulator, had scripts interface with the webserver, and had video feeds stream from the simulator to the webserver's teleoperation portals.
-3. The analysis scripts. After conducting the user study, we ran an analysis script to process the webserver logs into cognitive skill test scores and robot teleoperation scores, calculate metrics, and generate plots.
-4. User scores from our study. These scores were obtained using the analysis scripts provided, and then anonymized. They are useful as a verification of our results, and can potentially be used as a dataset. 
+1. The webserver code we used to conduct our online user study. Contains the cognitive skill tests and robot teleoperation tasks.
+2. The robot 3D simulation environments. We used the Webots simulator, and had the robot video feeds stream from the simulator to the participant's browser.
+3. The data analysis scripts. After conducting the user study, we ran an analysis script to process the webserver logs into cognitive skill test scores and robot teleoperation scores, calculate metrics, and generate plots.
+4. User scores from our study. These scores were obtained using the analysis scripts provided, and then anonymized. They are useful as a verification of our results, and can potentially be used as a dataset.
 
-All code should work out of the box. While we do not have an anaconda environment set up for this project, `requirements.txt` details the Python 3 packages and versions used. Please email Jack Kolb if there are any issues!
+All code should work out of the box. While we do not have an anaconda environment set up for this project, `requirements.txt` details the Python 3 packages needed. Please email Jack Kolb if there are any issues!
 
 ___
 
@@ -35,11 +35,9 @@ ___
 
 ### Analysis Module
 
-The Analysis Module runs linearly -- a single script (`main.py`) processes the data (calling various functions in other files), analyzes the possible user teams, and plots the results. Most of the heavy lifting is pushed to functions in Python scripts in the `/processing/`, `/allocation/`, and `/plotting/` folders.
+The Analysis Module is packaged as a single script (`main.py`) that processes the data, analyzes the possible user teams, and plots the results. Most of the heavy lifting is pushed to functions in Python scripts in the `/processing/`, `/allocation/`, and `/plotting/` folders.
 
 As shown in the *Getting Started* section, the terminal command `$ python3 main.py` will run the analysis module.
-
-**NOTE: If you make your own log files by running through the user study, create a `/logs/` folder in `/analysis/` and place the log .txt files there for analysis! You will also need to uncomment a line in `main.py`, see that file's comments for instructions.**
 
 Below is an outline of what each file contains.
 
@@ -48,7 +46,7 @@ Below is an outline of what each file contains.
  ┣ 📂allocation
  ┃ ┗ 📜assignment_util.py  --  handles user logs processing, handles team generation, has utility functions for team processing.
  ┃ ┗ 📜onehot_allocation.py  --  manages team processing.
- ┣ 📂**logs** -- not included on the GitHub repository (empty), create this folder and place user log files from the webserver here.
+ ┣ 📂logs -- place user log files from the webserver here.
  ┣ 📂plotting
  ┃ ┗ 📜plot_histogram.py  --  generates histogram distributions of team scores using several allocation mechanisms (in paper).
  ┃ ┗ 📜plot_lines.py  --  generates a line plot of the predicted scores and actual scores of all users (**not** in paper).
@@ -82,7 +80,7 @@ ___
 
 ### Webserver Module
 
-The Webserver Module is a Python webserver built on Flask and ROS1, and the code is contained in the `/server/` folder. The webserver is the interface between study participants and the WeBots simulator. Since we want to pass information between the participant's browser and the WeBots simulator (which is ROS-based), we ran the webserver on the same computer as the simulator run both a ROS node to interact with the simulator, and a webserver to deliver web and ROS content to users over the internet.
+The Webserver Module is a Python webserver built on Flask and ROS1, and the code is contained in the `/server/` folder. The webserver is the interface between study participants and the Webots simulator. Since we want to pass information between the participant's browser and the Webots simulator (which is ROS-based), we ran the webserver on the same computer as the simulator run both a ROS node to interact with the simulator, and a webserver to deliver web and ROS content to users over the internet. You can also run the simulator and webserver on seperate computers connected to the same ROS master node.
 
 To start the webserver, open a terminal and run:
 
@@ -90,9 +88,9 @@ To start the webserver, open a terminal and run:
 
 `$ python3 app.py`
 
-By default the webserver binds to port 5000, this is specified by the `port=5000` parameter at the bottom of `app.py`, and can be changed to whatever port you wish to use. Using port 80 is common as it is the default http port, other ports will require specifying the port in the URL, `http://(address):(port)`, for example `http://1.2.3.4:5000`. Sometimes Flask or Python will fail to unbind from a port when the server is restarted, giving a "Address already in use" error when running the webserver. In that event, it is easiest to just change the port in `app.py`.
+By default the webserver binds to port 5000, this is specified by the `port=5000` parameter at the bottom of `app.py`, and can be changed to whatever port you wish to use. Using port 80 is common as it is the default http port, other ports will require specifying the port in the URL, `http://(address):(port)`, for example `http://1.2.3.4:5000`. Sometimes Flask or Python will fail to unbind from a port when the webserver is restarted, giving a "Address already in use" error when running the webserver. In that event, it is easiest to just change the port in `app.py` and start the webserver again.
 
-To give our server a public web address without the hassle of port forwarding (which can be challenging over a school network), we used [ngrok](https://ngrok.com). If you plan to only use the webserver locally (i.e., connect to it only with devices on your personal or university's network), there is no need to run ngrok, and you can use your webserver computer's IP address.
+To give our server a public web address without the hassle of port forwarding (which can be challenging over a university network), we used [ngrok](https://ngrok.com). If you plan to only use the webserver locally (i.e., connect to it only with devices on your personal or university's network, such as an in-person user study), there is no need to run ngrok, and you can use your webserver computer's IP address.
 
 After installing ngrok, to create an HTTP tunnel to a specified port, open a terminal and run:
 
@@ -113,11 +111,49 @@ The webserver covers:
 
 Additionally, the webserver:
 
-* Uses ROS to interface with the WeBots simulator to set/remove waypoints for each robot.
+* Uses ROS to interface with the Webots simulator to set/remove waypoints for each robot.
 * Converts video feeds from simulator robots into browser-compatible messages, used for the teleoperation tasks.
-* Maintains teleoperation task states and syncs task states between the WeBots simulator and the user's browser.
+* Maintains teleoperation task states and syncs task states between the Webots simulator and the user's browser.
 
-The webserver's files contain detailed comments on the implementation, so instead we will document the routes that are provided to the user.
+The webserver's files contain detailed comments on the implementation.
 
-(TODO: Add route documentation)
+The best way to see how we used the webserver (and to try it out yourself) is by checking out [our study script (Google Docs)](https://docs.google.com/document/d/1y-0var-6Ltc6vcixZux_ZgciKB3cbiNUhBCvaw7DXXA). As a note, the `workerId` URL parameter is the participant's ID. 
+
+___
+
+### Simulation Module
+
+Our simulation is built using Webots ROS, where we implemented custom controllers for several mobile robots to enable waypoint navigation.
+
+Webots ROS can be installed through apt:
+
+`$ sudo apt-get install ros-melodic-webots-ros`
+
+To launch Webots ROS, run the following:
+
+`$ roslaunch webots_ros webots_ros_python.launch`
+
+Our environment is built upon https://github.com/chungshan/formation_uavs. We have two world files, `experiment_world_uavs.wbt` and `experiment_world_ugvs.wbt`. As denoted by the file names, the former has four UAVs (DGI Mavic drones) for Stage 1, and the later has four UGVs (Clearpath Moose robots) for Stage 3. Our Stage 2, where the participant controls four UAVs and four UGVs, does not need a 3D simulation as there are no visual feeds presented to the user.
+
+To run a world, simply open the `.wbt` file and press the play button in the simulator. To improve the simulation framerate we disabled the renderer during our studies (button above the view window).
+
+___
+
+### Citing Our Work
+
+If you use our work, please cite us!
+
+BibTex:
+```
+@inproceedings{kolb2022predicting,
+  title={Leveraging Cognitive States In Human-Robot Teaming},
+  author={Kolb, Jack and Ravichandar, Harish and Chernova, Sonia},
+  booktitle={2022 31st IEEE International Conference on Robot \& Human Interactive Communication (RO-MAN)},
+  year={2022},
+  organization={IEEE}
+}
+```
+
+MLA:
+Kolb, Jack, et al. "Leveraging Cognitive States In Human-Robot Teaming." 2022 31st IEEE International Conference on Robot & Human Interactive Communication (RO-MAN). IEEE, 2022.
 

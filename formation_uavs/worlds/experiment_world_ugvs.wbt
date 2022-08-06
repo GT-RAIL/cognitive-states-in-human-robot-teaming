@@ -1,10 +1,9 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
   info [
-    "This demonstration shows a DJI Mavic 2 PRO flying over a rural area."
-    "After the drone has taken off, you can control it with the keyboard of your computer."
+    "UGV teleoperation environment."
   ]
-  title "DJI Mavic 2 PRO demo"
+  title "Stage 3 Teleoperation"
   basicTimeStep 8
   defaultDamping Damping {
     linear 0.5

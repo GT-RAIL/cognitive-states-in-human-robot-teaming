@@ -6,7 +6,7 @@
 
 GitHub repository for our paper "Leveraging Cognitive States In Human-Robot Teaming", presented at RO-MAN 2022.
 
-In this work, we investigated the question *"Can we leverage a team's cognitive state to improve the team's role assignments?"*. Put simply, if we have three people to assign to three different roles, can we use measurements of different cognitive skills to inform who is assigned to each role?
+In this work, we investigated the question *"Can we leverage a team's cognitive state to improve the team's role assignments?"*. Put simply, if we have three people to assign to three different roles, can we use measurements of different cognitive skills to decide who to assign to each role?
 
 We conducted a (virtual) user study where participants took three "cognitive skill" tests, and then performed three robot teleoperation tasks. We then created a model that uses cognitive skill scores to predict user performance at the robot teleoperation tasks. Lastly, we split users into teams and evaluated the impact of our model on informing role allocation of team members. We found that our *Individualized Role Assignment* (IRA) resulted in allocations that performed ~20% superior to random allocation.
 

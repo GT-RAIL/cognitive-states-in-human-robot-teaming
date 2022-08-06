@@ -139,7 +139,7 @@ To run a world, simply open the `.wbt` file and press the play button in the sim
 
 ___
 
-### Citing Our Work
+### Citing Our Paper
 
 If you use our work, please cite us!
 

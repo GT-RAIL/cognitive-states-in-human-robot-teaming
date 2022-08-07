@@ -139,6 +139,20 @@ To run a world, simply open the `.wbt` file and press the play button in the sim
 
 ___
 
+### Cognitive Skill Test Releases
+
+The cognitive skill tests are based on established cognitive skill tests, so we released them as standalone modules. Their GitHub repositories are:
+
+* Object Tracking Test: [GitHub](https://github.com/gt-rail/cogtest-object-tracking)
+
+* Network Inference Test: [GitHub](https://github.com/gt-rail/cogtest-network-inference)
+
+* Situation Awareness Test: [GitHub](https://github.com/gt-rail/cogtest-situation-awareness)
+
+* Questionnaire: [GitHub](https://github.com/gt-rail/cogtest-questionnaire)
+
+___
+
 ### Citing Our Paper
 
 If you use our work, please cite us!

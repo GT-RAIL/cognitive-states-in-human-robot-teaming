@@ -149,8 +149,6 @@ The cognitive skill tests are based on established cognitive skill tests, so we 
 
 * Situation Awareness Test: [GitHub](https://github.com/gt-rail/cogtest-situation-awareness)
 
-* Questionnaire: [GitHub](https://github.com/gt-rail/cogtest-questionnaire)
-
 ___
 
 ### Citing Our Paper

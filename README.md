@@ -80,7 +80,7 @@ ___
 
 ### Webserver Module
 
-The Webserver Module is a Python webserver built on Flask and ROS1, and the code is contained in the `/server/` folder. The webserver is the interface between study participants and the Webots simulator. Since we want to pass information between the participant's browser and the Webots simulator (which is ROS-based), we ran the webserver on the same computer as the simulator run both a ROS node to interact with the simulator, and a webserver to deliver web and ROS content to users over the internet. You can also run the simulator and webserver on seperate computers connected to the same ROS master node.
+The Webserver Module is a Python webserver built on Flask and ROS1, and the code is contained in the `/server/` folder. The webserver is the interface between study participants and the Webots simulator. Since we want to pass information between the participant's browser and the Webots simulator (which is ROS-based), we ran the webserver on the same computer as the simulator, so the processes were connected via ROS. The webserver delivered web and ROS content to users over the internet. You can also run the simulator and webserver on seperate computers connected to the same ROS master node.
 
 To start the webserver, open a terminal and run:
 
